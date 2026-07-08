@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* GOGA brand-forward palette: deep red + neutral slate surfaces */
+  --background: 0 0% 100%;
+  --foreground: 222 47% 11%;
+  --card: 0 0% 100%;
+  --card-foreground: 222 47% 11%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222 47% 11%;
+
+  --primary: 354 78% 42%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 353 53% 96%;
+  --secondary-foreground: 354 70% 28%;
+  --accent: 353 53% 96%;
+  --accent-foreground: 354 70% 28%;
+
+  --muted: 220 14% 96%;
+  --muted-foreground: 220 9% 42%;
+  --border: 220 13% 91%;
+  --input: 220 13% 91%;
+  --ring: 354 78% 42%;
+
+  --success: 145 63% 36%;
+  --warning: 32 95% 44%;
+  --danger: 0 72% 48%;
+}
+
+.dark {
+  --background: 222 30% 8%;
+  --foreground: 210 20% 96%;
+  --card: 223 26% 11%;
+  --card-foreground: 210 20% 96%;
+  --popover: 223 26% 11%;
+  --popover-foreground: 210 20% 96%;
+
+  --primary: 354 82% 56%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 353 35% 18%;
+  --secondary-foreground: 353 86% 90%;
+  --accent: 353 35% 18%;
+  --accent-foreground: 353 86% 90%;
+
+  --muted: 220 16% 17%;
+  --muted-foreground: 220 12% 70%;
+  --border: 220 15% 22%;
+  --input: 220 15% 22%;
+  --ring: 354 82% 56%;
+
+  --success: 145 63% 48%;
+  --warning: 32 95% 56%;
+  --danger: 0 84% 62%;
+}
+
+body {
+  @apply overflow-x-hidden bg-background text-foreground antialiased;
+}

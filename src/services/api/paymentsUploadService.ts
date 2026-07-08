@@ -10,7 +10,12 @@ export const paymentsUploadService = {
   ): Promise<ImportPaymentsResponse> {
     const response = await axiosInstance.post<ImportPaymentsResponse>(
       "/payments/import",
-      payload
+      payload,
+      {
+        // Import can include receipt generation + email automation, which may
+        // legitimately take longer than the default API timeout.
+        timeout: 180000
+      }
     );
     return response.data;
   }

@@ -20,6 +20,7 @@ import { PreviewTable } from "@/features/payments-upload/components/preview-tabl
 import { ImportSummary } from "@/features/payments-upload/components/import-summary";
 import { parseExcelFile } from "@/features/payments-upload/utils/parseExcel";
 import { paymentsUploadService } from "@/services/api/paymentsUploadService";
+import { getApiErrorMessage } from "@/lib/utils";
 import type {
   ImportPaymentsResponse,
   ParsedPaymentRow,
@@ -86,8 +87,12 @@ export default function UploadPaymentsPage() {
       });
       setSummary(result);
       toast.success("Payments imported successfully");
-    } catch {
-      toast.error("Import failed. Please review the file and try again.");
+    } catch (error) {
+      const message = getApiErrorMessage(
+        error,
+        "Import is taking longer than expected. Please wait a moment and check the Payments list before retrying."
+      );
+      toast.error(message);
     } finally {
       setIsSubmitting(false);
     }

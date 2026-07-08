@@ -1,9 +1,28 @@
 import type { Metadata } from "next";
 import { branding } from "@/config/branding";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3001";
+function resolveSiteUrl(): string {
+  const explicitSiteUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  if (explicitSiteUrl) {
+    return explicitSiteUrl.replace(/\/$/, "");
+  }
+
+  // Vercel injects these in production/preview environments.
+  const vercelProductionUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL?.trim();
+  if (vercelProductionUrl) {
+    return `https://${vercelProductionUrl.replace(/^https?:\/\//, "").replace(/\/$/, "")}`;
+  }
+
+  const vercelUrl = process.env.VERCEL_URL?.trim();
+  if (vercelUrl) {
+    return `https://${vercelUrl.replace(/^https?:\/\//, "").replace(/\/$/, "")}`;
+  }
+
+  return "http://localhost:3001";
+}
 
 export function buildRootMetadata(): Metadata {
+  const siteUrl = resolveSiteUrl();
   const ogImage = `${siteUrl}${branding.social.imagePath}`;
 
   return {

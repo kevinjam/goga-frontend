@@ -10,7 +10,16 @@ import {
 } from "recharts";
 import type { CategoryPoint } from "@/types/dashboard";
 
-const COLORS = ["#9e0027", "#3755c3", "#454d63", "#d97706", "#0891b2"];
+const DEFAULT_COLORS = ["#3755c3", "#454d63", "#9e0027", "#0891b2", "#7c3aed"];
+
+function getCategoryColor(category: string, index: number) {
+  const key = category.toLowerCase();
+  if (key.includes("mtn")) return "#eab308";
+  if (key.includes("airtel")) return "#dc2626";
+  if (key.includes("bank")) return "#2563eb";
+  if (key.includes("cash")) return "#0f766e";
+  return DEFAULT_COLORS[index % DEFAULT_COLORS.length];
+}
 
 export function ExpenseCategoryChart({ data }: { data: CategoryPoint[] }) {
   return (
@@ -33,7 +42,7 @@ export function ExpenseCategoryChart({ data }: { data: CategoryPoint[] }) {
               paddingAngle={2}
             >
               {data.map((entry, index) => (
-                <Cell key={entry.category} fill={COLORS[index % COLORS.length]} />
+                <Cell key={entry.category} fill={getCategoryColor(entry.category, index)} />
               ))}
             </Pie>
             <Tooltip

@@ -47,15 +47,9 @@ export default function MembersPage() {
 
   return (
     <section className="space-y-6">
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <div>
-          <h1 className="text-xl font-semibold tracking-tight md:text-2xl">Members</h1>
-          <p className="text-sm text-muted-foreground">
-            Manage member records and account status.
-          </p>
-        </div>
+      <div className="flex flex-wrap items-center justify-end gap-3">
         <Button className="w-full sm:w-auto" onClick={() => setIsAddDialogOpen(true)}>
-          <Plus className="mr-2 h-4 w-4" />
+          <Plus className="h-3.5 w-3.5" />
           Add member
         </Button>
       </div>
@@ -66,9 +60,11 @@ export default function MembersPage() {
         onCreated={() => void refetch()}
       />
 
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-base">Directory</CardTitle>
+      <Card className="overflow-hidden">
+        <CardHeader className="border-b border-neutral-200 bg-neutral-50 pb-3 dark:border-neutral-800 dark:bg-neutral-900/50">
+          <CardTitle className="font-display text-sm font-bold tracking-tight uppercase">
+            Members Directory
+          </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="relative w-full max-w-md">

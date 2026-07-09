@@ -3,7 +3,10 @@ import { cn } from "@/lib/utils";
 export function Table({ className, ...props }: React.ComponentProps<"table">) {
   return (
     <div className="w-full overflow-x-auto overscroll-x-contain">
-      <table className={cn("w-full min-w-[640px] caption-bottom text-sm", className)} {...props} />
+      <table
+        className={cn("w-full min-w-[640px] border-collapse text-left text-xs", className)}
+        {...props}
+      />
     </div>
   );
 }
@@ -12,21 +15,28 @@ export function TableHeader({
   className,
   ...props
 }: React.ComponentProps<"thead">) {
-  return <thead className={cn("[&_tr]:border-b", className)} {...props} />;
+  return (
+    <thead
+      className={cn("bg-neutral-50 [&_tr]:border-b [&_tr]:border-neutral-200 dark:bg-neutral-900/50", className)}
+      {...props}
+    />
+  );
 }
 
 export function TableBody({
   className,
   ...props
 }: React.ComponentProps<"tbody">) {
-  return <tbody className={cn("[&_tr:last-child]:border-0", className)} {...props} />;
+  return (
+    <tbody className={cn("divide-y divide-neutral-100 dark:divide-neutral-800", className)} {...props} />
+  );
 }
 
 export function TableRow({ className, ...props }: React.ComponentProps<"tr">) {
   return (
     <tr
       className={cn(
-        "border-b border-border transition-colors hover:bg-muted/40",
+        "transition-colors hover:bg-neutral-50/50 dark:hover:bg-neutral-800/40",
         className
       )}
       {...props}
@@ -38,7 +48,7 @@ export function TableHead({ className, ...props }: React.ComponentProps<"th">) {
   return (
     <th
       className={cn(
-        "h-10 px-3 text-left align-middle text-xs font-semibold uppercase tracking-wide text-muted-foreground",
+        "px-6 py-4 text-left align-middle text-[10px] font-bold uppercase tracking-wider text-neutral-400",
         className
       )}
       {...props}
@@ -47,5 +57,5 @@ export function TableHead({ className, ...props }: React.ComponentProps<"th">) {
 }
 
 export function TableCell({ className, ...props }: React.ComponentProps<"td">) {
-  return <td className={cn("p-3 align-middle", className)} {...props} />;
+  return <td className={cn("px-6 py-4 align-middle", className)} {...props} />;
 }

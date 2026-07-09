@@ -34,7 +34,7 @@ export function ReportsFilterToolbar(props: ReportsFilterToolbarProps) {
   const [filtersExpanded, setFiltersExpanded] = useState(false);
 
   return (
-    <div className="sticky top-14 z-10 space-y-3 rounded-lg border border-border bg-card/95 p-4 backdrop-blur sm:top-16">
+    <div className="sticky top-16 z-10 space-y-3 rounded-lg border border-neutral-200 bg-white/95 p-4 shadow-xs backdrop-blur dark:border-neutral-800 dark:bg-neutral-900/95">
       <div className="flex items-center justify-between gap-3 lg:hidden">
         <Button
           type="button"
@@ -74,7 +74,7 @@ export function ReportsFilterToolbar(props: ReportsFilterToolbarProps) {
       <div className={`space-y-3 ${filtersExpanded ? "block" : "hidden"} lg:block`}>
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
           <Select value={props.datePreset} onValueChange={(v: DatePreset) => props.onDatePresetChange(v)}>
-            <SelectTrigger className="min-h-10"><SelectValue placeholder="Date range" /></SelectTrigger>
+            <SelectTrigger className="min-h-10 bg-card"><SelectValue placeholder="Date range" /></SelectTrigger>
             <SelectContent>
               <SelectItem value="7d">Last 7 Days</SelectItem>
               <SelectItem value="30d">Last 30 Days</SelectItem>
@@ -87,17 +87,17 @@ export function ReportsFilterToolbar(props: ReportsFilterToolbarProps) {
             value={props.category}
             onChange={(e) => props.onCategoryChange(e.target.value)}
             placeholder="Category"
-            className="min-h-10"
+            className="min-h-10 bg-card"
           />
           <Input
             value={props.department}
             onChange={(e) => props.onDepartmentChange(e.target.value)}
             placeholder="Department"
-            className="min-h-10"
+            className="min-h-10 bg-card"
           />
 
           <Select value={props.status} onValueChange={(v: StatusDimension) => props.onStatusChange(v)}>
-            <SelectTrigger className="min-h-10"><SelectValue placeholder="Status" /></SelectTrigger>
+            <SelectTrigger className="min-h-10 bg-card"><SelectValue placeholder="Status" /></SelectTrigger>
             <SelectContent>
               <SelectItem value="all">All Status</SelectItem>
               <SelectItem value="matched">Matched</SelectItem>
@@ -109,7 +109,7 @@ export function ReportsFilterToolbar(props: ReportsFilterToolbarProps) {
             value={props.paymentMethod}
             onValueChange={(v: "all" | PaymentMethod) => props.onPaymentMethodChange(v)}
           >
-            <SelectTrigger className="min-h-10"><SelectValue placeholder="Payment method" /></SelectTrigger>
+            <SelectTrigger className="min-h-10 bg-card"><SelectValue placeholder="Payment method" /></SelectTrigger>
             <SelectContent>
               <SelectItem value="all">All Methods</SelectItem>
               <SelectItem value="BANK">Bank</SelectItem>
@@ -126,13 +126,13 @@ export function ReportsFilterToolbar(props: ReportsFilterToolbarProps) {
               type="date"
               value={props.customStartDate}
               onChange={(e) => props.onCustomStartDateChange(e.target.value)}
-              className="min-h-10"
+              className="min-h-10 bg-card"
             />
             <Input
               type="date"
               value={props.customEndDate}
               onChange={(e) => props.onCustomEndDateChange(e.target.value)}
-              className="min-h-10"
+              className="min-h-10 bg-card"
             />
           </div>
         ) : null}

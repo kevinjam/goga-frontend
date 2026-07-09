@@ -66,7 +66,7 @@ export function MembersTable({
   );
 
   return (
-    <div className="relative rounded-lg border border-border bg-card">
+    <div className="relative overflow-hidden rounded-lg border border-neutral-200 bg-white shadow-xs dark:border-neutral-800 dark:bg-neutral-900">
       {isRefreshing ? (
         <div className="absolute inset-x-0 top-0 z-10 h-0.5 overflow-hidden bg-muted">
           <div className="h-full w-1/3 animate-pulse bg-primary" />
@@ -213,7 +213,7 @@ function RowActions({
     <AlertDialog>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost" size="icon" className="h-10 w-10" aria-label="Open actions">
+          <Button variant="ghost" size="icon" className="h-9 w-9" aria-label="Open actions">
             <MoreHorizontal className="h-4 w-4" />
           </Button>
         </DropdownMenuTrigger>

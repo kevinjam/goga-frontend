@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { toast } from "sonner";
 import { reportsService } from "@/services/api/reportsService";
 import type { PaymentMethod, ReportFilters, ReportRow } from "@/types/reports";
+import { FileText } from "lucide-react";
 import {
   ReportsFilterToolbar,
   type DatePreset,
@@ -183,14 +184,20 @@ export default function ReportsPage() {
 
   return (
     <section className="space-y-6 print:space-y-4">
-      <div className="print:hidden">
-        <h1 className="text-xl font-semibold tracking-tight md:text-2xl">Reports & Analytics</h1>
-        <p className="text-sm text-muted-foreground">
-          Interactive financial and operational reporting dashboard.
-        </p>
-      </div>
-
-      <div className="print:hidden">
+      <div className="space-y-4 rounded-lg border border-neutral-200 bg-white p-5 shadow-xs print:hidden dark:border-neutral-800 dark:bg-neutral-900">
+        <div className="flex items-center gap-3">
+          <span className="rounded bg-goga-crimson/5 p-2 text-goga-crimson">
+            <FileText className="h-5 w-5" />
+          </span>
+          <div>
+            <h3 className="font-display text-sm font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
+              Finance Audit Report Compiler
+            </h3>
+            <p className="text-[11px] text-neutral-400">
+              Compile aggregated payment, receipt matching, and category trends into exportable reports.
+            </p>
+          </div>
+        </div>
         <ReportsFilterToolbar
           datePreset={datePreset}
           category={category}

@@ -29,9 +29,9 @@ export function TablePaginationFooter({
     );
 
   return (
-    <div className="flex flex-col gap-3 border-t border-border p-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
+    <div className="flex flex-col gap-3 border-t border-neutral-200 bg-neutral-50 px-6 py-4 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between dark:border-neutral-800 dark:bg-neutral-900/50">
       <div className="flex items-center gap-2">
-        <span className="text-sm text-muted-foreground">Rows:</span>
+        <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">Rows</span>
         <Select value={String(limit)} onValueChange={(value) => onLimitChange(Number(value))}>
           <SelectTrigger className="h-9 w-20">
             <SelectValue />
@@ -47,7 +47,7 @@ export function TablePaginationFooter({
       </div>
 
       {typeof total === "number" ? (
-        <p className="text-sm text-muted-foreground">
+        <p className="text-xs text-muted-foreground">
           Page {page} of {totalPages} • Total {total}
         </p>
       ) : null}

@@ -112,9 +112,11 @@ export function UsersSettingsTab({
 
   return (
     <div className="grid h-full min-h-0 gap-4 lg:grid-cols-[340px_1fr]">
-      <Card className="flex flex-col overflow-hidden">
-        <CardHeader className="pb-3">
-          <CardTitle className="text-base">Create Admin User</CardTitle>
+      <Card className="flex flex-col overflow-hidden shadow-sm">
+        <CardHeader className="border-b border-neutral-200 bg-neutral-50 pb-3 dark:border-neutral-800 dark:bg-neutral-900/50">
+          <CardTitle className="font-display text-sm font-bold uppercase tracking-wider">
+            Create Admin User
+          </CardTitle>
           <CardDescription>Auto-generated temporary password with welcome email.</CardDescription>
         </CardHeader>
         <CardContent className="overflow-y-auto">
@@ -157,9 +159,11 @@ export function UsersSettingsTab({
         </CardContent>
       </Card>
 
-      <Card className="flex min-h-0 flex-col overflow-hidden">
-        <CardHeader className="pb-3">
-          <CardTitle className="text-base">System Users</CardTitle>
+      <Card className="flex min-h-0 flex-col overflow-hidden shadow-sm">
+        <CardHeader className="border-b border-neutral-200 bg-neutral-50 pb-3 dark:border-neutral-800 dark:bg-neutral-900/50">
+          <CardTitle className="font-display text-sm font-bold uppercase tracking-wider">
+            System Users
+          </CardTitle>
           <CardDescription>Manage accounts, welcome email status, and activation.</CardDescription>
         </CardHeader>
         <CardContent className="min-h-0 flex-1 overflow-auto p-0">

@@ -29,7 +29,7 @@ export function GogaLogo({
         "relative shrink-0 overflow-hidden",
         dimensions.box,
         showBorder &&
-          "rounded-xl border border-border bg-white p-1.5 shadow-sm",
+          "rounded-lg border border-goga-crimson/20 bg-goga-crimson/5 p-1.5 shadow-sm",
         className
       )}
     >

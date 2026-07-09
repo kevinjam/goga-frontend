@@ -57,16 +57,9 @@ export default function SettingsPage() {
   }
 
   return (
-    <section className="flex h-[calc(100dvh-8.5rem)] flex-col overflow-hidden">
-      <div className="shrink-0">
-        <h1 className="text-xl font-semibold tracking-tight">Settings</h1>
-        <p className="text-sm text-muted-foreground">
-          User management, audit trail, security, and email delivery.
-        </p>
-      </div>
-
+    <section className="flex h-[calc(100dvh-8rem)] max-w-[1240px] flex-col overflow-hidden">
       <Tabs
-        className="mt-4 shrink-0"
+        className="shrink-0"
         value={activeTab}
         onValueChange={(value) => setActiveTab(value as SettingsTab)}
         items={[...TAB_ITEMS]}

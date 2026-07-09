@@ -58,9 +58,11 @@ export function SecuritySettingsTab() {
 
   return (
     <div className="grid h-full min-h-0 gap-4 md:grid-cols-2">
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-base">Invitation Expiry</CardTitle>
+      <Card className="shadow-sm">
+        <CardHeader className="border-b border-neutral-200 bg-neutral-50 pb-3 dark:border-neutral-800 dark:bg-neutral-900/50">
+          <CardTitle className="font-display text-sm font-bold uppercase tracking-wider">
+            Invitation Expiry
+          </CardTitle>
           <CardDescription>Time-limited temporary passwords for new users.</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -86,9 +88,11 @@ export function SecuritySettingsTab() {
         </CardContent>
       </Card>
 
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-base">Admin Password Reset</CardTitle>
+      <Card className="shadow-sm">
+        <CardHeader className="border-b border-neutral-200 bg-neutral-50 pb-3 dark:border-neutral-800 dark:bg-neutral-900/50">
+          <CardTitle className="font-display text-sm font-bold uppercase tracking-wider">
+            Admin Password Reset
+          </CardTitle>
           <CardDescription>
             Trigger password reset links for users from Settings (not public).
           </CardDescription>

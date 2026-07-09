@@ -63,12 +63,12 @@ export default function ChangePasswordPage() {
   }
 
   return (
-    <main className="mx-auto flex min-h-screen w-full max-w-md flex-col justify-center gap-6 p-6">
-      <AuthBranding priority />
-      <Card className="w-full">
-        <CardHeader className="space-y-2 text-center">
-          <CardTitle className="text-base">Change your password</CardTitle>
-          <p className="text-sm text-muted-foreground">
+    <main className="mx-auto flex min-h-screen w-full max-w-md flex-col justify-center bg-neutral-50 p-6 dark:bg-neutral-950">
+      <Card className="w-full border-neutral-200 shadow-xs">
+        <CardHeader className="space-y-6">
+          <AuthBranding />
+          <CardTitle className="text-center">Change your password</CardTitle>
+          <p className="text-center text-[10px] text-neutral-400">
             For security, you must set a new password before accessing the system.
           </p>
         </CardHeader>

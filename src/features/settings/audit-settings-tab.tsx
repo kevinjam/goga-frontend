@@ -81,10 +81,12 @@ export function AuditSettingsTab() {
   }, [page, action]);
 
   return (
-    <Card className="flex h-full min-h-0 flex-col overflow-hidden">
-      <CardHeader className="flex flex-row items-start justify-between gap-4 pb-3">
+    <Card className="flex h-full min-h-0 flex-col overflow-hidden shadow-sm">
+      <CardHeader className="flex flex-row items-start justify-between gap-4 border-b border-neutral-200 bg-neutral-50 pb-3 dark:border-neutral-800 dark:bg-neutral-900/50">
         <div>
-          <CardTitle className="text-base">Audit Log</CardTitle>
+          <CardTitle className="font-display text-sm font-bold uppercase tracking-wider">
+            Audit Log
+          </CardTitle>
           <CardDescription>User creation, email delivery, and password events.</CardDescription>
         </div>
         <Select

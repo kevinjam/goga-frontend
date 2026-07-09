@@ -12,7 +12,6 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { SidebarBrand } from "@/components/branding/sidebar-brand";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { useAuth } from "@/context/AuthContext";
 
 const navItems = [
@@ -36,55 +35,55 @@ export function DashboardSidebar({
   const isCompact = variant === "compact";
 
   return (
-    <aside className="flex h-full w-full flex-col">
-      <div className="border-b border-border">
+    <aside className="flex h-full w-full flex-col justify-between py-6 px-4">
+      <div className="space-y-8">
         <SidebarBrand compact={isCompact} />
+
+        <nav className="space-y-1">
+          {navItems.map((item) => {
+            const isActive =
+              item.href === "/dashboard"
+                ? pathname === "/dashboard"
+                : pathname === item.href || pathname.startsWith(`${item.href}/`);
+            const Icon = item.icon;
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={onNavigate}
+                title={isCompact ? item.label : undefined}
+                aria-label={isCompact ? item.label : undefined}
+                className={cn(
+                  "flex w-full items-center rounded-lg text-left text-xs font-semibold transition-all",
+                  isCompact ? "justify-center px-2 py-2.5" : "gap-3 px-3.5 py-2.5",
+                  isActive
+                    ? "scale-[0.98] bg-goga-crimson text-white shadow-sm font-bold"
+                    : "text-neutral-500 hover:bg-neutral-100 hover:text-neutral-800 dark:text-neutral-400 dark:hover:bg-neutral-800 dark:hover:text-neutral-200"
+                )}
+              >
+                <Icon className="h-4 w-4 shrink-0" />
+                {!isCompact ? item.label : null}
+              </Link>
+            );
+          })}
+        </nav>
       </div>
 
-      <nav className={cn("flex-1 space-y-1", isCompact ? "p-2" : "p-3")}>
-        {navItems.map((item) => {
-          const isActive =
-            pathname === item.href || pathname.startsWith(`${item.href}/`);
-          const Icon = item.icon;
-          return (
-            <Link
-              key={item.href}
-              href={item.href}
-              onClick={onNavigate}
-              title={isCompact ? item.label : undefined}
-              aria-label={isCompact ? item.label : undefined}
-              className={cn(
-                "flex items-center rounded-md text-sm transition-colors",
-                isCompact ? "justify-center px-2 py-2.5" : "gap-3 px-3 py-2",
-                isActive
-                  ? "bg-primary text-primary-foreground"
-                  : "text-muted-foreground hover:bg-muted hover:text-foreground"
-              )}
-            >
-              <Icon className="h-4 w-4 shrink-0" />
-              {!isCompact ? item.label : null}
-            </Link>
-          );
-        })}
-      </nav>
-
-      <div className={cn("border-t border-border", isCompact ? "p-2" : "p-4")}>
-        <div className={cn("flex items-center", isCompact ? "justify-center" : "gap-3")}>
-          <Avatar>
-            <AvatarFallback>
+      {!isCompact ? (
+        <div className="border-t border-neutral-200 pt-4 dark:border-neutral-800">
+          <div className="flex items-center gap-3 px-1">
+            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-goga-crimson/20 bg-goga-crimson/10 text-xs font-bold text-goga-crimson">
               {user?.name?.slice(0, 2).toUpperCase() ?? "GU"}
-            </AvatarFallback>
-          </Avatar>
-          {!isCompact ? (
-            <div className="min-w-0">
-              <p className="truncate text-sm font-medium">{user?.name ?? "Guest User"}</p>
-              <p className="truncate text-xs text-muted-foreground">
-                {user?.role ?? "N/A"}
-              </p>
             </div>
-          ) : null}
+            <div className="min-w-0">
+              <p className="truncate text-xs font-semibold text-neutral-800 dark:text-neutral-100">
+                {user?.name ?? "Guest User"}
+              </p>
+              <p className="truncate text-[10px] text-neutral-400">{user?.role ?? "N/A"}</p>
+            </div>
+          </div>
         </div>
-      </div>
+      ) : null}
     </aside>
   );
 }

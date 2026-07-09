@@ -104,26 +104,15 @@ export default function UploadPaymentsPage() {
 
   return (
     <section className="space-y-6">
-      <div className="space-y-1">
-        <h1 className="text-xl font-semibold tracking-tight md:text-2xl">Upload Payments</h1>
-        <p className="text-sm text-muted-foreground">
-          Drop a payment spreadsheet, preview records, and bulk import to the
-          system.
-        </p>
-        <a href="#" className="text-sm text-primary hover:underline">
-          Download Template Spreadsheet
-        </a>
-      </div>
-
-      <Card>
-        <CardHeader>
-          <CardTitle>Spreadsheet Upload</CardTitle>
+      <Card className="overflow-hidden">
+        <CardHeader className="border-b border-neutral-200 bg-neutral-50 pb-3 dark:border-neutral-800 dark:bg-neutral-900/50">
+          <CardTitle className="uppercase">Spreadsheet Upload</CardTitle>
           <CardDescription>
             Required columns: Date, Received From, Amount, Method, Purpose.
             Transaction Reference is optional.
           </CardDescription>
         </CardHeader>
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-4 pt-4">
           <UploadDropZone
             file={file}
             disabled={isParsing || isSubmitting}

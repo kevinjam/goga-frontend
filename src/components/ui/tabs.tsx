@@ -14,17 +14,17 @@ export function Tabs({
   className?: string;
 }) {
   return (
-    <div className={cn("flex flex-wrap gap-2 border-b border-border pb-2", className)}>
+    <div className={cn("inline-flex flex-wrap gap-0.5 rounded-md bg-neutral-100 p-0.5", className)}>
       {items.map((item) => (
         <button
           key={item.value}
           type="button"
           onClick={() => onValueChange(item.value)}
           className={cn(
-            "rounded-md px-3 py-2 text-sm font-medium transition-colors",
+            "rounded-md px-3 py-1 text-xs font-semibold transition-all",
             value === item.value
-              ? "bg-primary text-primary-foreground"
-              : "text-muted-foreground hover:bg-muted hover:text-foreground"
+              ? "bg-white text-goga-crimson shadow-xs"
+              : "text-neutral-500 hover:text-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-200"
           )}
         >
           {item.label}

@@ -57,11 +57,11 @@ export function FilterToolbar({
         value={search}
         onChange={(event) => onSearchChange(event.target.value)}
         placeholder="Search vendor, reference, amount..."
-        className="min-h-10"
+        className="min-h-10 bg-card"
       />
 
       <Select value={status} onValueChange={(value: "all" | PaymentStatus) => onStatusChange(value)}>
-        <SelectTrigger className="min-h-10">
+        <SelectTrigger className="min-h-10 bg-card">
           <SelectValue placeholder="Status" />
         </SelectTrigger>
         <SelectContent>
@@ -74,7 +74,7 @@ export function FilterToolbar({
       </Select>
 
       <Select value={method} onValueChange={(value: MethodFilter) => onMethodChange(value)}>
-        <SelectTrigger className="min-h-10">
+        <SelectTrigger className="min-h-10 bg-card">
           <SelectValue placeholder="Method" />
         </SelectTrigger>
         <SelectContent>
@@ -87,7 +87,7 @@ export function FilterToolbar({
       </Select>
 
       <Select value={dateRange} onValueChange={(value: DateRangeFilter) => onDateRangeChange(value)}>
-        <SelectTrigger className="min-h-10">
+        <SelectTrigger className="min-h-10 bg-card">
           <SelectValue placeholder="Date Range" />
         </SelectTrigger>
         <SelectContent>

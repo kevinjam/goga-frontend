@@ -45,8 +45,8 @@ export default function LoginPage() {
   };
 
   return (
-    <main className="mx-auto flex min-h-screen w-full max-w-md flex-col justify-center p-6">
-      <Card className="w-full">
+    <main className="mx-auto flex min-h-screen w-full max-w-md flex-col justify-center bg-neutral-50 p-6 dark:bg-neutral-950">
+      <Card className="w-full border-neutral-200 shadow-xs">
         <CardHeader className="space-y-6">
           <AuthBranding priority />
           <CardTitle className="text-center text-base">Sign in</CardTitle>
@@ -67,7 +67,7 @@ export default function LoginPage() {
                 {...form.register("email")}
               />
               {form.formState.errors.email && (
-                <p className="text-sm text-red-600">
+                <p className="text-xs text-red-600">
                   {form.formState.errors.email.message}
                 </p>
               )}
@@ -83,7 +83,7 @@ export default function LoginPage() {
                 {...form.register("password")}
               />
               {form.formState.errors.password && (
-                <p className="text-sm text-red-600">
+                <p className="text-xs text-red-600">
                   {form.formState.errors.password.message}
                 </p>
               )}

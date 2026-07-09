@@ -26,8 +26,8 @@ export function MobileDataCard({
           : undefined
       }
       className={cn(
-        "rounded-lg border border-border bg-card p-4 shadow-sm",
-        onClick && "cursor-pointer transition-colors hover:bg-muted/40",
+        "rounded-lg border border-neutral-200 bg-white p-4 shadow-xs dark:border-neutral-800 dark:bg-neutral-900",
+        onClick && "cursor-pointer transition-all hover:border-goga-crimson/30 hover:shadow-md",
         className
       )}
     >
@@ -47,8 +47,8 @@ export function MobileDataCardField({
 }) {
   return (
     <div className={cn("min-w-0", className)}>
-      <p className="text-xs uppercase tracking-wide text-muted-foreground">{label}</p>
-      <div className="truncate text-sm font-medium">{value}</div>
+      <p className="text-[10px] font-bold uppercase tracking-wider text-neutral-400">{label}</p>
+      <div className="truncate text-xs font-semibold text-neutral-800 dark:text-neutral-100">{value}</div>
     </div>
   );
 }

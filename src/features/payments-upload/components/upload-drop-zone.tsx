@@ -42,8 +42,8 @@ export function UploadDropZone({
         className={cn(
           "rounded-lg border-2 border-dashed p-6 text-center transition-colors sm:p-8",
           dropzone.isDragActive
-            ? "border-primary bg-primary/5"
-            : "border-border bg-card",
+            ? "border-goga-crimson bg-goga-crimson/5"
+            : "border-neutral-200 bg-white dark:border-neutral-700 dark:bg-neutral-900",
           disabled && "pointer-events-none opacity-60"
         )}
       >

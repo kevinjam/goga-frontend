@@ -166,26 +166,20 @@ export default function PaymentsPage() {
 
   return (
     <section className="space-y-6">
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <div>
-          <h1 className="text-xl font-semibold tracking-tight md:text-2xl">Payments Ledger</h1>
-          <p className="text-sm text-muted-foreground">
-            Audit, verify, and examine payment records.
-          </p>
-        </div>
+      <div className="flex flex-col items-stretch justify-between gap-4 sm:flex-row sm:items-center">
         <Link href="/dashboard/payments/upload" className="w-full sm:w-auto">
           <Button className="w-full sm:w-auto">
-            <Upload className="mr-2 h-4 w-4" />
+            <Upload className="h-3.5 w-3.5" />
             Upload Payments
           </Button>
         </Link>
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-base">Ledger Filters</CardTitle>
+      <Card className="overflow-hidden">
+        <CardHeader className="border-b border-neutral-200 bg-neutral-50 pb-3 dark:border-neutral-800 dark:bg-neutral-900/50">
+          <CardTitle className="uppercase">Ledger Filters</CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="pt-4">
           <FilterToolbar
             search={search}
             status={status}

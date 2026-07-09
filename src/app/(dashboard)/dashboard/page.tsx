@@ -5,10 +5,11 @@ import { DashboardSkeleton } from "@/components/dashboard/dashboard-skeleton";
 import { MetricCard } from "@/components/dashboard/metric-card";
 import { ReceiptVolumeChart } from "@/components/dashboard/receipt-volume-chart";
 import { ExpenseCategoryChart } from "@/components/dashboard/expense-category-chart";
-import { branding } from "@/config/branding";
 import { dashboardService } from "@/services/api/dashboardService";
+import { paymentsService } from "@/services/api/paymentsService";
 import type { DashboardMetrics, KpiMetric, KpiTrend } from "@/types/dashboard";
-import { CheckCircle2, DollarSign, FileText, Users } from "lucide-react";
+import type { PaymentRecord } from "@/types/payments";
+import { CheckCircle2, Clock, CreditCard, DollarSign, FileText, Users } from "lucide-react";
 
 function formatInt(n: number): string {
   return n.toLocaleString("en-US");
@@ -55,6 +56,7 @@ function calcGrowthPct(curr: number, prev: number): { trend: KpiTrend; growth?: 
 
 export default function DashboardPage() {
   const [metrics, setMetrics] = useState<DashboardMetrics | null>(null);
+  const [recentPayments, setRecentPayments] = useState<PaymentRecord[]>([]);
   const [isInitialLoading, setIsInitialLoading] = useState(true);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -70,7 +72,10 @@ export default function DashboardPage() {
         }
         setError(null);
 
-        const stats = await dashboardService.getStats();
+        const [stats, paymentResponse] = await Promise.all([
+          dashboardService.getStats(),
+          paymentsService.getPayments({ page: 1, limit: 4 })
+        ]);
 
       const monthly = stats.monthlyCollections ?? [];
       const lastMonth = monthly[monthly.length - 1];
@@ -135,6 +140,7 @@ export default function DashboardPage() {
       };
 
         setMetrics(next);
+        setRecentPayments(paymentResponse.data);
         hasLoadedOnceRef.current = true;
       } catch (err) {
         const message =
@@ -154,7 +160,7 @@ export default function DashboardPage() {
   if (error || !metrics) {
     return (
       <div className="space-y-4">
-        <h1 className="text-xl font-semibold md:text-2xl">Dashboard Overview</h1>
+        <h1 className="font-display text-xl font-bold md:text-2xl">Dashboard Overview</h1>
         <p className="text-sm text-destructive">
           {error ?? "Unable to load dashboard metrics."}
         </p>
@@ -165,28 +171,71 @@ export default function DashboardPage() {
   return (
     <div className="space-y-6">
       {isRefreshing ? (
-        <div className="h-0.5 overflow-hidden rounded bg-muted">
-          <div className="h-full w-1/3 animate-pulse bg-primary" />
+        <div className="h-0.5 overflow-hidden rounded bg-neutral-100">
+          <div className="h-full w-1/3 animate-pulse bg-goga-crimson" />
         </div>
       ) : null}
-      <div>
-        <h1 className="text-xl font-semibold md:text-2xl">
-          {branding.dashboard.welcomeTitle}
-        </h1>
-        <p className="text-sm text-muted-foreground">
-          {branding.dashboard.welcomeSubtitle}
-        </p>
-      </div>
 
-      <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
         {metrics.kpis.map((metric) => (
           <MetricCard key={metric.id} metric={metric} />
         ))}
       </section>
 
-      <section className="grid gap-4 xl:grid-cols-2">
+      <section className="grid grid-cols-1 gap-6 lg:grid-cols-3">
         <ReceiptVolumeChart data={metrics.receiptVolume} />
         <ExpenseCategoryChart data={metrics.expenseCategories} />
+      </section>
+
+      <section className="space-y-3 rounded-lg border border-neutral-200 bg-white p-5 shadow-xs dark:border-neutral-800 dark:bg-neutral-900">
+        <div className="flex items-center justify-between border-b border-neutral-100 pb-3 dark:border-neutral-800">
+          <div>
+            <h3 className="font-display text-sm font-bold tracking-tight text-neutral-900 dark:text-neutral-100">
+              Active Financial ledger Feed
+            </h3>
+            <p className="text-[10px] text-neutral-400">
+              Latest reconciled and approved transaction posts
+            </p>
+          </div>
+          <span className="flex items-center gap-1 text-[11px] text-neutral-400">
+            <Clock className="h-3.5 w-3.5" />
+            <span>Recently synced</span>
+          </span>
+        </div>
+
+        <div className="divide-y divide-neutral-100 text-xs dark:divide-neutral-800">
+          {recentPayments.length > 0 ? (
+            recentPayments.map((txn) => (
+              <div key={txn.id} className="flex items-center justify-between gap-4 py-3">
+                <div className="flex items-center gap-3">
+                  <div className="rounded border border-neutral-150 bg-neutral-50 p-2 text-neutral-700 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-200">
+                    <CreditCard className="h-4 w-4" />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-neutral-800 dark:text-neutral-100">
+                      {txn.receivedFrom ?? "Payment Entry"}
+                    </p>
+                    <p className="font-mono text-[10px] text-neutral-400">
+                      ID: {txn.id} | Ref: {txn.transactionReference}
+                    </p>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <p className="font-mono font-bold text-neutral-800 dark:text-neutral-100">
+                    UGX {txn.amount.toLocaleString()}
+                  </p>
+                  <span className="inline-block rounded border border-green-150 bg-green-50 px-1.5 py-0.5 text-[9px] font-bold text-green-700">
+                    Approved
+                  </span>
+                </div>
+              </div>
+            ))
+          ) : (
+            <p className="py-6 text-center text-sm text-neutral-400">
+              No recent ledger entries yet.
+            </p>
+          )}
+        </div>
       </section>
     </div>
   );

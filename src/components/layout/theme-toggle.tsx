@@ -35,7 +35,7 @@ export function ThemeToggle() {
   return (
     <Button
       variant="ghost"
-      className="h-9 w-9 p-0"
+      className="h-9 w-9 rounded-lg p-0 hover:bg-neutral-100 hover:text-goga-crimson"
       onClick={toggleTheme}
       aria-label="Toggle theme"
     >

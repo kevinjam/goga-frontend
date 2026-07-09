@@ -43,7 +43,7 @@ export function PaymentsTable({
   onSelectRow
 }: PaymentsTableProps) {
   return (
-    <div className="relative rounded-lg border border-border bg-card">
+    <div className="relative overflow-hidden rounded-lg border border-neutral-200 bg-white shadow-xs dark:border-neutral-800 dark:bg-neutral-900">
       {isRefreshing ? (
         <div className="absolute inset-x-0 top-0 z-10 h-0.5 overflow-hidden bg-muted">
           <div className="h-full w-1/3 animate-pulse bg-primary" />
@@ -134,7 +134,7 @@ export function PaymentsTable({
                   <TableCell>{new Date(row.date).toLocaleDateString()}</TableCell>
                   <TableCell className="font-medium">{row.transactionReference}</TableCell>
                   <TableCell className="hidden lg:table-cell">{row.receivedFrom ?? "—"}</TableCell>
-                  <TableCell>{row.amount.toLocaleString()}</TableCell>
+                  <TableCell className="font-mono font-semibold">{row.amount.toLocaleString()}</TableCell>
                   <TableCell className="hidden xl:table-cell">{row.method.replaceAll("_", " ")}</TableCell>
                   <TableCell><PaymentStatusBadge status={row.status} /></TableCell>
                 </TableRow>

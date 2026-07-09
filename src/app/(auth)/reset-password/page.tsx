@@ -75,8 +75,8 @@ export default function ResetPasswordPage() {
   };
 
   return (
-    <main className="mx-auto flex min-h-screen w-full max-w-md flex-col justify-center p-6">
-      <Card className="w-full">
+    <main className="mx-auto flex min-h-screen w-full max-w-md flex-col justify-center bg-neutral-50 p-6 dark:bg-neutral-950">
+      <Card className="w-full border-neutral-200 shadow-xs">
         <CardHeader className="space-y-6">
           <AuthBranding />
           <CardTitle className="text-center text-base">Reset Password</CardTitle>

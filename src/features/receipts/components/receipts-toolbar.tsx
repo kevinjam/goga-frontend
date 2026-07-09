@@ -28,10 +28,11 @@ export function ReceiptsToolbar({
         value={search}
         onChange={(event) => onSearchChange(event.target.value)}
         placeholder="Search vendor, invoice, keywords..."
+        className="bg-card"
       />
 
       <Select value={source} onValueChange={(value: "all" | ReceiptSource) => onSourceChange(value)}>
-        <SelectTrigger>
+        <SelectTrigger className="bg-card">
           <SelectValue placeholder="Source" />
         </SelectTrigger>
         <SelectContent>
@@ -43,7 +44,7 @@ export function ReceiptsToolbar({
       </Select>
 
       <Select value={sortBy} onValueChange={(value: ReceiptSortKey) => onSortChange(value)}>
-        <SelectTrigger>
+        <SelectTrigger className="bg-card">
           <SelectValue placeholder="Sort By" />
         </SelectTrigger>
         <SelectContent>

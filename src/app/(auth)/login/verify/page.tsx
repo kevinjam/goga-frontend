@@ -18,6 +18,10 @@ import {
 } from "@/lib/login-challenge-storage";
 import { getApiErrorMessage } from "@/lib/utils";
 import {
+  AuthBranding,
+  AuthPoweredByFooter
+} from "@/components/branding/auth-branding";
+import {
   Button,
   Card,
   CardContent,
@@ -107,11 +111,12 @@ export default function LoginVerifyPage() {
   }
 
   return (
-    <main className="mx-auto flex min-h-screen w-full max-w-md flex-col justify-center p-6">
-      <Card className="w-full">
-        <CardHeader className="space-y-2 text-center">
-          <CardTitle className="text-base">Verify your login</CardTitle>
-          <p className="text-sm text-muted-foreground">
+    <main className="mx-auto flex min-h-screen w-full max-w-md flex-col justify-center bg-neutral-50 p-6 dark:bg-neutral-950">
+      <Card className="w-full border-neutral-200 shadow-xs">
+        <CardHeader className="space-y-4 text-center">
+          <AuthBranding priority />
+          <CardTitle>Verify your login</CardTitle>
+          <p className="text-[10px] text-neutral-400">
             Enter the 6-digit code sent to <span className="font-medium">{email}</span>
           </p>
         </CardHeader>
@@ -175,6 +180,9 @@ export default function LoginVerifyPage() {
           </div>
         </CardContent>
       </Card>
+      <div className="mt-6">
+        <AuthPoweredByFooter />
+      </div>
     </main>
   );
 }

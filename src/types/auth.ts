@@ -3,6 +3,7 @@ export interface AuthUser {
   name: string;
   email: string;
   role: UserRole;
+  mustChangePassword: boolean;
 }
 
 export type UserRole = "ADMIN" | "FINANCE_OFFICER" | "VIEWER";
@@ -15,6 +16,12 @@ export interface AuthTokens {
 export interface AuthResponse {
   user: AuthUser;
   tokens: AuthTokens;
+}
+
+export interface RegisterUserResponse {
+  user: AuthUser;
+  emailSent: boolean;
+  message: string;
 }
 
 export interface LoginChallengeResponse {
@@ -40,6 +47,11 @@ export interface LoginInput {
 export interface RegisterUserInput {
   name: string;
   email: string;
-  password: string;
   role: UserRole;
+}
+
+export interface ChangePasswordInput {
+  currentPassword: string;
+  newPassword: string;
+  confirmPassword: string;
 }

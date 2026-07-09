@@ -13,3 +13,4 @@ export * from "@/components/ui/skeleton";
 export * from "@/components/ui/alert-dialog";
 export * from "@/components/ui/progress";
 export * from "@/components/ui/alert";
+export * from "@/components/ui/tabs";

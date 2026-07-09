@@ -1,9 +1,11 @@
 import axiosInstance from "@/services/api/axiosInstance";
 import type {
   AuthResponse,
+  ChangePasswordInput,
   LoginChallengeResponse,
   LoginInput,
   RegisterUserInput,
+  RegisterUserResponse,
   ResendCodeInput,
   VerifyLoginInput
 } from "@/types/auth";
@@ -45,16 +47,39 @@ export const authService = {
     return response.data;
   },
 
-  async registerUser(payload: RegisterUserInput): Promise<AuthResponse["user"]> {
-    const response = await axiosInstance.post<AuthResponse["user"]>(
+  async registerUser(payload: RegisterUserInput): Promise<RegisterUserResponse> {
+    const response = await axiosInstance.post<RegisterUserResponse>(
       "/auth/register",
       payload
     );
     return response.data;
   },
 
-  // Placeholder: backend endpoint not implemented yet.
-  async requestPasswordReset(email: string): Promise<void> {
-    await axiosInstance.post("/auth/forgot-password", { email });
+  async changePassword(payload: ChangePasswordInput): Promise<AuthResponse["user"]> {
+    const response = await axiosInstance.post<AuthResponse["user"]>(
+      "/auth/change-password",
+      payload
+    );
+    return response.data;
+  },
+
+  async requestPasswordReset(email: string): Promise<{ message: string }> {
+    const response = await axiosInstance.post<{ message: string }>(
+      "/auth/forgot-password",
+      { email }
+    );
+    return response.data;
+  },
+
+  async resetPassword(payload: {
+    token: string;
+    newPassword: string;
+    confirmPassword: string;
+  }): Promise<{ message: string }> {
+    const response = await axiosInstance.post<{ message: string }>(
+      "/auth/reset-password",
+      payload
+    );
+    return response.data;
   }
 };

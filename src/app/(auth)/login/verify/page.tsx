@@ -67,8 +67,8 @@ export default function LoginVerifyPage() {
     setInfo(null);
 
     try {
-      await verifyLogin({ email, code: values.code });
-      router.replace("/dashboard");
+      const loggedInUser = await verifyLogin({ email, code: values.code });
+      router.replace(loggedInUser.mustChangePassword ? "/change-password" : "/dashboard");
     } catch (err) {
       setError(getApiErrorMessage(err, "Verification failed. Please try again."));
     }

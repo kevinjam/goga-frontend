@@ -12,9 +12,15 @@ import { authService } from "@/services/api/authService";
 import {
   clearAuthSession,
   getRefreshToken,
-  setAuthSession
+  setAuthSession,
+  setMustChangePasswordFlag
 } from "@/lib/auth-storage";
-import type { AuthUser, LoginInput, VerifyLoginInput } from "@/types/auth";
+import type {
+  AuthUser,
+  ChangePasswordInput,
+  LoginInput,
+  VerifyLoginInput
+} from "@/types/auth";
 import {
   clearLoginChallenge,
   storeLoginChallenge
@@ -24,8 +30,10 @@ interface AuthContextValue {
   user: AuthUser | null;
   isLoading: boolean;
   isAuthenticated: boolean;
+  mustChangePassword: boolean;
   startLogin: (payload: LoginInput) => Promise<void>;
-  verifyLogin: (payload: VerifyLoginInput) => Promise<void>;
+  verifyLogin: (payload: VerifyLoginInput) => Promise<AuthUser>;
+  changePassword: (payload: ChangePasswordInput) => Promise<void>;
   logout: () => void;
   refreshUser: () => Promise<void>;
 }
@@ -40,6 +48,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     try {
       const profile = await authService.me();
       setUser(profile);
+      setMustChangePasswordFlag(profile.mustChangePassword);
     } catch {
       setUser(null);
       clearAuthSession();
@@ -53,9 +62,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const verifyLogin = useCallback(async (payload: VerifyLoginInput) => {
     const response = await authService.verifyLogin(payload);
-    setAuthSession(response.tokens);
+    setAuthSession(response.tokens, response.user);
     setUser(response.user);
     clearLoginChallenge();
+    return response.user;
+  }, []);
+
+  const changePassword = useCallback(async (payload: ChangePasswordInput) => {
+    const updatedUser = await authService.changePassword(payload);
+    setUser(updatedUser);
+    setMustChangePasswordFlag(updatedUser.mustChangePassword);
   }, []);
 
   const logout = useCallback(() => {
@@ -77,7 +93,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
       try {
         const refreshed = await authService.refresh(refreshToken);
-        setAuthSession(refreshed.tokens);
+        setAuthSession(refreshed.tokens, refreshed.user);
         setUser(refreshed.user);
       } catch {
         clearAuthSession();
@@ -95,12 +111,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       user,
       isLoading,
       isAuthenticated: Boolean(user),
+      mustChangePassword: Boolean(user?.mustChangePassword),
       startLogin,
       verifyLogin,
+      changePassword,
       logout,
       refreshUser
     }),
-    [isLoading, logout, refreshUser, startLogin, verifyLogin, user]
+    [changePassword, isLoading, logout, refreshUser, startLogin, verifyLogin, user]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
